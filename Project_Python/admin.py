@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.contrib import admin
 
 # from Project_Python.models import *
-from Project_Python.models import Position, Worker
+from Project_Python.models import Position, Worker, Tournament
 
 admin.register(Position)
 admin.register(Worker)
+admin.register(Tournament)

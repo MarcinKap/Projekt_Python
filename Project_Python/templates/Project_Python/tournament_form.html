@@ -1,0 +1,19 @@
+{% extends 'Project_Python/scheleton.html' %}
+
+{% load bootstrap4 %}
+
+
+{% block content %}
+
+    <h4>Tworzenie turnieju</h4>
+
+    <form method="post">
+
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        <button class="btn btn-success">Zarejestruj</button>
+
+    </form>
+
+{% endblock %}

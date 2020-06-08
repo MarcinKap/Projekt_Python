@@ -1,0 +1,97 @@
+{% extends 'Project_Python/scheleton.html' %}
+
+{% block content %}
+    <div>
+        <h3 class="display-4">Tournaments</h3>
+        {% if user.is_authenticated %}
+            <a href="/tournaments/add/">
+                <button class="btn btn-primary btn-sm h-d-btn" style="margin-bottom: 4px">
+                    Add new tournament
+                </button>
+            </a>
+        {% endif %}
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Maximum number participants</th>
+            <th>Current number participants</th>
+            <th>Start Date</th>
+            {% if user.is_authenticated %}
+                <th></th>
+                <th></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for tournament in object_list %}
+            <tr>
+                <td>{{ tournament.id }}</td>
+                <td>{{ tournament.name }}</td>
+                <td>{{ tournament.max_number_participants }}</td>
+                <td>{{ tournament.current_number_participants }}</td>
+                <td>{{ tournament.start_date }}</td>
+                {% if user.is_authenticated %}
+                    <td><a href="{% url 'tournament_update' tournament.id %}">edit</a>
+                    <td><a href="#" data-url="{% url 'tournament_delete' tournament.id %}" data-toggle="modal"
+                           data-target="#exampleModal">delete</a>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" data-url=""
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete a position</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="save_button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+        S
+    </div>
+
+    <script language="JavaScript">
+        function csrfSafeMethod(method) {
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                var csrftoken = Cookies.get('csrftoken');
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        $("a[data-url]").each(function (_, element) {
+            element.onclick = function () {
+                var delete_url = this.getAttribute('data-url');
+                $("#exampleModal").data('url', delete_url);
+                $('#exampleModal').modal('show');
+            };
+        });
+
+        $("#save_button").click(function () {
+            var delete_url = $("#exampleModal").data('url');
+            $.post(delete_url).done(function () {
+                location.reload();
+            });
+        })
+    </script>
+{% endblock %}
