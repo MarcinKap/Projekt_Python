@@ -20,14 +20,14 @@ from django.urls import path
 
 from Project_Python.views import NewLoginView, NewLogoutView, AllPositionView, CreatePositionView, UpdatePositionView, \
     DetailPositionView, DeletePositionView, WorkerListView, CreateWorkerView, UpdateWorkerView, DeleteWorkerView, \
-    AvgWorkersView
+    AvgWorkersView, IndexView
 from Project_Python.views.register_view import SignUpView
 # from Project_Python.views.tournament import TournamentCreatorView
 from Project_Python.views.tournament import CreateTournamentView, UpdateTournamentView, DetailTournamentView, \
     DeleteTournamentView, AllTournamentView
 
 urlpatterns = [
-    path('', NewLoginView.as_view( ), name='index'),
+    path('', IndexView.as_view( ), name='index'),
     path('logout', NewLogoutView.as_view( ), name='logout'),
     path('logout', NewLogoutView.as_view( ), name='logout'),
     path('positions', AllPositionView.as_view( ), name="all_positions"),
@@ -52,6 +52,8 @@ urlpatterns = [
     path('tournaments/<int:pk>/update', UpdateTournamentView.as_view( ), name="tournament_update"),
     path('tournaments/<int:pk>/', DetailTournamentView.as_view( ), name="tournament_detail"),
     path('tournaments/<int:pk>/delete', DeleteTournamentView.as_view( ), name="tournament_delete"),
+
+    path('log_in', NewLoginView.as_view( ), name="tournament_delete"),
 
 
 

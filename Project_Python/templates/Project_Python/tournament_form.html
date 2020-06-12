@@ -5,14 +5,14 @@
 
 {% block content %}
 
-    <h4>Tworzenie turnieju</h4>
+    <h4>Creating new tournament</h4>
 
     <form method="post">
 
         {% csrf_token %}
         {% bootstrap_form form %}
 
-        <button class="btn btn-success">Zarejestruj</button>
+        <button class="btn btn-success">Register</button>
 
     </form>
 

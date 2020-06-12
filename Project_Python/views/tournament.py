@@ -12,7 +12,7 @@ from Project_Python import logger
 from Project_Python.models import Position, Tournament
 
 
-class AllTournamentView(LoginRequiredMixin, ListView):
+class AllTournamentView(ListView):
     model = Tournament
     login_url = reverse_lazy('index')
     # paginate_by = 10
@@ -36,7 +36,7 @@ class DetailTournamentView(LoginRequiredMixin, DetailView):
 
 class CreateTournamentView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Tournament
-    fields = ['id', 'name', 'max_number_participants', 'current_number_participants', 'start_date']
+    fields = ['id', 'name', 'max_number_participants', 'start_date']
     success_message = "Entry was created successfully"
     success_url = reverse_lazy('all_tournament')
     login_url = reverse_lazy('index')
