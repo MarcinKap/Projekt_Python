@@ -1,0 +1,30 @@
+{% extends 'Project_Python/scheleton.html' %}
+
+{% load bootstrap4 %}
+
+
+{% block content %}
+
+    <h4>Add player to phase</h4>
+
+
+    <form  action="{% url 'tournament_phase_add_player_adding'%}" method="get">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="exampleInputEmail1">Phase id = {{ phase.id}}</label>
+        <input type="number" class="form-control" id="phase_id" value={{ phase.id}} name="phase_id" hidden>
+    </div>
+    <div class="form-group">
+        <label for="player_id">Player to add</label>
+        <select name="player_id" class="browser-default custom-select">
+          <option name="player_id" selected>Open this select menu</option>
+             {% for player in player_tournament_list %}
+          <option name="player_id" value= {{player.player.id}}>{{player.player.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Add player</button>
+  </form>
+    
+    
+{% endblock %}

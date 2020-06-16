@@ -35,11 +35,7 @@
                 <td>{{ tournament.current_number_participants }}</td>
                 <td>{{ tournament.start_date }}</td>
                 {% if user.is_authenticated %}
-{#                    {% if tournament.max_number_participants <= tournament.current_number_participants %}#}
-{#                    <td><a href="{% url 'playertournament_add' tournament.id %}" hidden>add player</a>#}
-{#                        {% else %}#}
-{#                        <td><a href="{% url 'playertournament_add' tournament.id %}" >add player</a>#}
-{#                {% endif %}#}
+                     <td><a href="{% url 'tournament_results' tournament.id %}" >results</a>
                      <td><a href="{% url 'tournament_update' tournament.id %}" >edit</a>
 {#                    <td><a href="{% url 'playertournament_add' tournament.id %}">add player</a>#}
                     <td><a href="#" data-url="{% url 'tournament_delete' tournament.id %}" data-toggle="modal"

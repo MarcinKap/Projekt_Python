@@ -134,5 +134,4 @@ def find_tournament_result(request):
         'start_date': start_date,
         'end_date': end_date
     }
-
     return HttpResponse(template.render(context, request))

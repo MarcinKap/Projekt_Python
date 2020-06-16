@@ -37,7 +37,7 @@ def add_player(request):
     max_participiants = Tournament.objects.get(pk=tournament_id).max_number_participants
 
     # Sprawdzenie czy dane obiekty juz są w tabeli
-    player_tournament_presence = PlayerTournament.objects.filter(tournament=10, player=player_id).count( )
+    player_tournament_presence = PlayerTournament.objects.filter(tournament=tournament_id, player=player_id).count( )
 
     # Obiekty do zapisania w tabeli
     tournament_object = Tournament.objects.get(pk=tournament_id)

@@ -18,7 +18,8 @@ from django.urls import include
 from django.contrib import admin
 from django.urls import path
 
-from Project_Python.views import NewLoginView, NewLogoutView, IndexView, player_tournament_view, tournament_view
+from Project_Python.views import NewLoginView, NewLogoutView, IndexView, player_tournament_view, tournament_view, \
+    tournament_phase_view
 from Project_Python.views.player_tournament_view import CreatePlayerTournamentView
 from Project_Python.views.player_view import AllPlayersView, CreatePlayerView, DetailPlayerView, DeletePlayerView
 from Project_Python.views.register_view import SignUpView
@@ -82,5 +83,13 @@ urlpatterns = [
 
 
 
+    path('findtournamentresult/result', tournament_view.find_tournament_result, name="tournament_search_result2"),
+
+
+    path('tournaments/phase/<int:pk>', tournament_phase_view.tournament_phase_list, name="tournament_results"),
+
+    path('tournaments/phase_added/<int:pk>', tournament_phase_view.tournament_phase_add, name="phase_add"),
+    path('tournaments/phase/add_player/<int:pk>', tournament_phase_view.tournament_phase_add_player_form, name="phase_add_player"),
+    path('tournaments/phase/add_player/', tournament_phase_view.tournament_phase_add_player_adding, name="tournament_phase_add_player_adding"),
 
 ]

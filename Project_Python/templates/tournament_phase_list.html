@@ -1,0 +1,69 @@
+{% extends 'Project_Python/scheleton.html' %}
+
+{% load bootstrap4 %}
+
+
+{% block content %}
+
+    <h3>Tournament players and phases</h3>
+    <tr>
+        <h4>All players</h4>
+    </tr>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for playertournament in player_tournament_list %}
+            <tr>
+                <td>{{ playertournament.player.name }}</td>
+                <td>{{ playertournament.player.surname }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <tr>
+        <h4>Phases</h4>
+    </tr>
+    {% if user.is_authenticated %}
+        <a href="{% url 'phase_add' tournament %}">
+            <button class="btn btn-primary btn-sm h-d-btn" style="margin-bottom: 4px">
+                Add new phase
+            </button>
+        </a>
+    {% endif %}
+
+    {% for phase in phases_list %}
+        <tr>
+            <h5>Winner players in {{ phase.name }}</h5>
+            {% if user.is_authenticated %}
+                <a href="{% url 'phase_add_player' phase.id %}">
+                    <button class="btn btn-primary btn-sm h-d-btn" style="margin-bottom: 4px">
+                        Add new player to phase
+                    </button>
+                </a>
+            {% endif %}
+        </tr>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for phase_player in phases_players %}
+                {% if phase_player.tournament_phase.id == phase.id   %}
+                    <tr>
+                        <td>{{ phase_player.player.name }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+{% endblock %}
