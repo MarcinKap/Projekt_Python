@@ -28,10 +28,14 @@
 
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'playertournament_add' %}">Add new tournament</a>
+                    <a class="nav-link" href="{% url 'playertournament_add' %}">Add player to tournament</a>
                 </li>
             {% endif %}
-
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tournament_search' %}">Search tournament</a>
+                </li>
+            {% endif %}
         </ul>
         <ul class="navbar-nav navbar-right">
             {% if user.is_authenticated %}

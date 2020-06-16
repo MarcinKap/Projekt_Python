@@ -17,6 +17,6 @@ class Tournament(models.Model):
     def __str__(self):
         return str(self.name)
 
-    def save(self, *args, **kwargs):
-        print('save() is called.')
-        super(Tournament, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     print('save() is called.')
+    #     super(Tournament, self).save(*args, **kwargs)

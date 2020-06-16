@@ -2,13 +2,17 @@
 
 {% block content %}
     <div>
-        <h3 class="display-4">Tournaments</h3>
+        <h3 class="display-4">Tournaments history</h3>
+        <h4>{{ start_date }} - {{ end_date }}</h4>
+
         {% if user.is_authenticated %}
-            <a href="/tournaments/add/">
-                <button class="btn btn-primary btn-sm h-d-btn" style="margin-bottom: 4px">
-                    Add new tournament
-                </button>
-            </a>
+            <div>
+                <a href="/tournaments/add/">
+                    <button class="btn btn-primary btn-sm h-d-btn" style="margin-bottom: 4px">
+                        Add new tournament
+                    </button>
+                </a>
+            </div>
         {% endif %}
     </div>
     <table class="table">
@@ -19,11 +23,6 @@
             <th>Maximum number participants</th>
             <th>Current number participants</th>
             <th>Start Date</th>
-            {% if user.is_authenticated %}
-                <th></th>
-                <th></th>
-                <th></th>
-            {% endif %}
         </tr>
         </thead>
         <tbody>
@@ -34,17 +33,17 @@
                 <td>{{ tournament.max_number_participants }}</td>
                 <td>{{ tournament.current_number_participants }}</td>
                 <td>{{ tournament.start_date }}</td>
-                {% if user.is_authenticated %}
+{#                {% if user.is_authenticated %}#}
 {#                    {% if tournament.max_number_participants <= tournament.current_number_participants %}#}
 {#                    <td><a href="{% url 'playertournament_add' tournament.id %}" hidden>add player</a>#}
 {#                        {% else %}#}
 {#                        <td><a href="{% url 'playertournament_add' tournament.id %}" >add player</a>#}
 {#                {% endif %}#}
-                     <td><a href="{% url 'tournament_update' tournament.id %}" >edit</a>
+{#                     <td><a href="{% url 'tournament_update' tournament.id %}" >edit</a>#}
 {#                    <td><a href="{% url 'playertournament_add' tournament.id %}">add player</a>#}
-                    <td><a href="#" data-url="{% url 'tournament_delete' tournament.id %}" data-toggle="modal"
-                           data-target="#exampleModal">delete</a>
-                {% endif %}
+{#                    <td><a href="#" data-url="{% url 'tournament_delete' tournament.id %}" data-toggle="modal"#}
+{#                           data-target="#exampleModal">delete</a>#}
+{#                {% endif %}#}
             </tr>
         {% endfor %}
         </tbody>

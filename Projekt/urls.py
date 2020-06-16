@@ -18,13 +18,13 @@ from django.urls import include
 from django.contrib import admin
 from django.urls import path
 
-from Project_Python.views import NewLoginView, NewLogoutView, IndexView, player_tournament_view
+from Project_Python.views import NewLoginView, NewLogoutView, IndexView, player_tournament_view, tournament_view
 from Project_Python.views.player_tournament_view import CreatePlayerTournamentView
 from Project_Python.views.player_view import AllPlayersView, CreatePlayerView, DetailPlayerView, DeletePlayerView
 from Project_Python.views.register_view import SignUpView
 # from Project_Python.views.tournament import TournamentCreatorView
 from Project_Python.views.tournament_view import CreateTournamentView, UpdateTournamentView, DetailTournamentView, \
-    DeleteTournamentView, AllTournamentView
+    DeleteTournamentView, AllTournamentView, FindTournamentResult
 
 urlpatterns = [
     path('', IndexView.as_view( ), name='index'),
@@ -60,10 +60,27 @@ urlpatterns = [
     path('players/<int:pk>/', DetailPlayerView.as_view( ), name="player_detail"),
     path('players/<int:pk>/delete', DeletePlayerView.as_view( ), name="player_delete"),
 
-    # path('playertournaments/addplayer', CreatePlayerTournamentView.as_view( ), name="playertournament_add"),
+
+    # Miejsce do wyznaczania turnieju i gracza
+    path('playertournaments/addplayer', CreatePlayerTournamentView.as_view( ), name="playertournament_add"),
     # path('playertournaments/addplayer/<int:pk>', CreatePlayerTournamentView.as_view( ), name="playertournament_add"),
 
-    path('playertournaments/addplayer', player_tournament_view.CreatePlayerTournamentView, name="playertournament_add"),
-    path('playertournaments/addplayer/<int:pk>', player_tournament_view.CreatePlayerTournamentView, name="playertournament_add"),
+    # Kod zapisujacy turniej i gracza
+    path('playertournaments/addplayers', player_tournament_view.add_player, name="add_relation_player_tournament"),
+
+
+    # path('tournaments/searching', FindTournamentView.as_view(), name="tournament_search"),
+
+    #   ścieżka do strony z forms
+    path('tournaments/searching', tournament_view.find_tournament_view, name="tournament_search"),
+
+    # niepotrzbne
+    path('findtournamentresult', FindTournamentResult.as_view(), name="tournament_search_result"),
+
+    # wyswietlanie turnieji
+    path('findtournamentresult/result', tournament_view.find_tournament_result, name="tournament_search_result2"),
+
+
+
 
 ]
