@@ -5,7 +5,6 @@ from django.views import View
 from django.views.generic import CreateView, FormView
 
 from Project_Python.forms.sign_up_form import SignUpForm
-from Project_Python.models import Position
 from Project_Python.views.guest_view import GuestOnlyView
 from Projekt import settings
 from django.contrib import messages

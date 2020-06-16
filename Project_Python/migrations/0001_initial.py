@@ -2,6 +2,8 @@
 
 from django.db import migrations, models
 
+from Project_Python.models import Player
+
 
 class Migration(migrations.Migration):
 
@@ -12,12 +14,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Position',
+            name='Tournament',
             fields=[
                 ('id', models.AutoField(db_index=True, primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=20)),
-                ('min_salary', models.IntegerField()),
-                ('max_salary', models.IntegerField()),
+                ('max_number_participants', models.IntegerField( )),
+                ('current_number_participants', models.IntegerField( )),
+                ('start_date', models.DateField( )),
+                # ('players', models.ManyToManyField('Player'))
+                # ('users', models.)
             ],
         ),
     ]

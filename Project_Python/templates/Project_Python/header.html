@@ -7,30 +7,31 @@
                     </span>
                 </a>
             </li>
-            {#            <li class="nav-item dropdown">#}
-            {#                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Position</a>#}
-            {#                <div class="dropdown-menu">#}
-            {#                    <a class="dropdown-item" href="{% url 'position_add' %}">Create</a>#}
-            {#                    <a class="dropdown-item" href="{% url 'all_positions' %}">Show all</a>#}
-            {#                </div>#}
-            {#            </li>#}
-            {##}
-            {#            <li class="nav-item dropdown">#}
-            {#                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Worker</a>#}
-            {#                <div class="dropdown-menu">#}
-            {#                    <a class="dropdown-item" href="{% url 'worker_add' %}">Create</a>#}
-            {#                    <a class="dropdown-item" href="{% url 'all_workers' %}">Show all</a>#}
-            {#                    <a class="dropdown-item" href="{% url 'avg_workers' %}">Avg</a>#}
-            {#                </div>#}
-            {#            </li>#}
-            <li class="nav-item">
-                <a class="nav-link" href="/tournaments">Tournaments</a>
-            </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Tournaments</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'all_tournament' %}">Show tournaments</a>
+                                {% if user.is_authenticated %}
+                                <a class="dropdown-item" href="{% url 'tournament_add' %}">Create tournament</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Players</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'all_players' %}">Show players</a>
+                                {% if user.is_authenticated %}
+                                <a class="dropdown-item" href="{% url 'player_add' %}">Create player</a>
+                                {% endif %}
+                            </div>
+                        </li>
+
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/tournaments/add">Add new tournament</a>
+                    <a class="nav-link" href="{% url 'playertournament_add' %}">Add new tournament</a>
                 </li>
             {% endif %}
+
         </ul>
         <ul class="navbar-nav navbar-right">
             {% if user.is_authenticated %}

@@ -1,5 +1,5 @@
-from .position_model import Position
-from .worker_model import Worker
 from .tournament_model import Tournament
+from .player_model import Player
+from .player_tournament_model import PlayerTournament
 
-__all__ = ['Position', 'Worker', 'Tournament']
+__all__ = ['Tournament', 'Player','PlayerTournament']

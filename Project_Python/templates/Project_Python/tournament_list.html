@@ -22,6 +22,7 @@
             {% if user.is_authenticated %}
                 <th></th>
                 <th></th>
+                <th></th>
             {% endif %}
         </tr>
         </thead>
@@ -34,7 +35,13 @@
                 <td>{{ tournament.current_number_participants }}</td>
                 <td>{{ tournament.start_date }}</td>
                 {% if user.is_authenticated %}
-                    <td><a href="{% url 'tournament_update' tournament.id %}">edit</a>
+                    {% if tournament.max_number_participants <= tournament.current_number_participants %}
+                    <td><a href="{% url 'playertournament_add' tournament.id %}" hidden>add player</a>
+                        {% else %}
+                        <td><a href="{% url 'playertournament_add' tournament.id %}" >add player</a>
+                {% endif %}
+                     <td><a href="{% url 'tournament_update' tournament.id %}" >edit</a>
+{#                    <td><a href="{% url 'playertournament_add' tournament.id %}">add player</a>#}
                     <td><a href="#" data-url="{% url 'tournament_delete' tournament.id %}" data-toggle="modal"
                            data-target="#exampleModal">delete</a>
                 {% endif %}
@@ -58,7 +65,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="save_button" class="btn btn-primary">Save changes</button>
+                    <button type="button" id="save_button" class="btn btn-primary">Delete</button>
                 </div>
             </div>
         </div>
