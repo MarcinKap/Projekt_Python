@@ -25,27 +25,13 @@ from Project_Python.views.player_view import AllPlayersView, CreatePlayerView, D
 from Project_Python.views.register_view import SignUpView
 # from Project_Python.views.tournament import TournamentCreatorView
 from Project_Python.views.tournament_view import CreateTournamentView, UpdateTournamentView, DetailTournamentView, \
-    DeleteTournamentView, AllTournamentView, FindTournamentResult
+    DeleteTournamentView, AllTournamentView
 
 urlpatterns = [
     path('', IndexView.as_view( ), name='index'),
     path('logout', NewLogoutView.as_view( ), name='logout'),
     path('logout', NewLogoutView.as_view( ), name='logout'),
-    # path('positions', AllPositionView.as_view( ), name="all_positions"),
-    # path('positions/add/', CreatePositionView.as_view( ), name="position_add"),
-    # path('positions/<int:pk>/update', UpdatePositionView.as_view( ), name="position_update"),
-    # path('positions/<int:pk>/', DetailPositionView.as_view( ), name="position_detail"),
-    # path('positions/<int:pk>/delete', DeletePositionView.as_view( ), name="position_delete"),
-    # path('workers', WorkerListView.as_view( ), name='all_workers'),
-    # path('workers/add/', CreateWorkerView.as_view( ), name="worker_add"),
-    # path('workers/<int:pk>/update', UpdateWorkerView.as_view( ), name="worker_update"),
-    # path('workers/<int:pk>/delete', DeleteWorkerView.as_view( ), name="worker_delete"),
-    # path('avg_workers', AvgWorkersView.as_view( ), name='avg_workers'),
-
     path('admin/', admin.site.urls),
-    # path('Project_Python/', include('Project_Python.urls')),
-
-    # NOWE
     path('sign_up', SignUpView.as_view( ), name='sign_up'),
     # path('tournament_creator', TournamentCreatorView.as_view( ), name='tournament_creator'),
     path('tournaments', AllTournamentView.as_view( ), name="all_tournament"),
@@ -61,33 +47,16 @@ urlpatterns = [
     path('players/<int:pk>/', DetailPlayerView.as_view( ), name="player_detail"),
     path('players/<int:pk>/delete', DeletePlayerView.as_view( ), name="player_delete"),
 
-
     # Miejsce do wyznaczania turnieju i gracza
     path('playertournaments/addplayer', CreatePlayerTournamentView.as_view( ), name="playertournament_add"),
-    # path('playertournaments/addplayer/<int:pk>', CreatePlayerTournamentView.as_view( ), name="playertournament_add"),
-
     # Kod zapisujacy turniej i gracza
     path('playertournaments/addplayers', player_tournament_view.add_player, name="add_relation_player_tournament"),
-
-
-    # path('tournaments/searching', FindTournamentView.as_view(), name="tournament_search"),
-
     #   ścieżka do strony z forms
     path('tournaments/searching', tournament_view.find_tournament_view, name="tournament_search"),
-
-    # niepotrzbne
-    path('findtournamentresult', FindTournamentResult.as_view(), name="tournament_search_result"),
-
     # wyswietlanie turnieji
     path('findtournamentresult/result', tournament_view.find_tournament_result, name="tournament_search_result2"),
 
-
-
-    path('findtournamentresult/result', tournament_view.find_tournament_result, name="tournament_search_result2"),
-
-
     path('tournaments/phase/<int:pk>', tournament_phase_view.tournament_phase_list, name="tournament_results"),
-
     path('tournaments/phase_added/<int:pk>', tournament_phase_view.tournament_phase_add, name="phase_add"),
     path('tournaments/phase/add_player/<int:pk>', tournament_phase_view.tournament_phase_add_player_form, name="phase_add_player"),
     path('tournaments/phase/add_player/', tournament_phase_view.tournament_phase_add_player_adding, name="tournament_phase_add_player_adding"),

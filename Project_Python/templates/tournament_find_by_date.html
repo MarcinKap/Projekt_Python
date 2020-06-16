@@ -7,16 +7,6 @@
 
     <h4>Find tournaments</h4>
 
-{#    <form method="post">#}
-{##}
-{#        {% csrf_token %}#}
-{#        {% bootstrap_form form %}#}
-{##}
-{#        <button class="btn btn-success">Register</button>#}
-{##}
-{#    </form>#}
-
-
     <form  action="{% url 'tournament_search_result2'%}" method="get">
     {% csrf_token %}
     <div class="form-group">

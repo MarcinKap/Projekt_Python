@@ -7,7 +7,7 @@ from django.template import loader
 from Project_Python.models.tournament_phase_model import TournamentPhase
 from Project_Python.models.tournament_phase_player_model import TournamentPhasePlayer
 
-
+# Strona turnieju z lista faz i graczy
 def tournament_phase_list(request, pk):
     phases = TournamentPhase.objects.filter(tournament=pk)
     phases_players = TournamentPhasePlayer.objects.all( )
@@ -22,12 +22,10 @@ def tournament_phase_list(request, pk):
     }
     return HttpResponse(template.render(context, request))
 
-
+# Dodawanie Fazy po nacisnieciu przycisku
 def tournament_phase_add(request, pk):
-    print("dodawanie")
     number = TournamentPhase.objects.filter(tournament=pk).count( ) + 1
     TournamentPhase.objects.create(name='Phase ' + str(number), tournament=Tournament.objects.get(id=pk))
-
     # Fazy
     phases = TournamentPhase.objects.filter(tournament=pk)
     # Relacje faza-gracz
@@ -46,6 +44,7 @@ def tournament_phase_add(request, pk):
     }
     return HttpResponse(template.render(context, request))
 
+# Formatka pod zapis relacji faza - gracz ograniczająca wybór graczy
 def tournament_phase_add_player_form(request, pk):
     phase = TournamentPhase.objects.get(id=pk)
     print(phase.id)
@@ -58,7 +57,7 @@ def tournament_phase_add_player_form(request, pk):
     }
     return HttpResponse(template.render(context, request))
 
-
+# Dodawanie relacji faza - gracz
 def tournament_phase_add_player_adding(request):
     phase_id = request.GET.get('phase_id')
     player_id = request.GET.get('player_id')

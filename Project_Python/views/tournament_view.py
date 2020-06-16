@@ -19,11 +19,10 @@ from django.http import HttpResponse
 from django.template import loader
 
 
+# Wszystkie turnieje
 class AllTournamentView(ListView):
     model = Tournament
     login_url = reverse_lazy('index')
-
-    # paginate_by = 10
 
     def get_context_data(self, **kwargs):
         logger.debug('AllTournamentView.get_context_data')
@@ -51,6 +50,7 @@ class DetailTournamentView(LoginRequiredMixin, DetailView):
         return context
 
 
+# Tworzenie turnieju
 class CreateTournamentView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Tournament
     fields = ['id', 'name', 'max_number_participants', 'start_date']
@@ -59,10 +59,12 @@ class CreateTournamentView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = reverse_lazy('index')
 
 
+# Klasa wspomagajaće UpdateTournamentView
 class UpdateViewForTournament(SingleObjectTemplateResponseMixin, BaseUpdateView):
     template_name_suffix = '_update'
 
 
+# Update turnieju
 class UpdateTournamentView(LoginRequiredMixin, SuccessMessageMixin, UpdateViewForTournament):
     model = Tournament
 
@@ -79,50 +81,14 @@ class DeleteTournamentView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         return reverse('all_tournament')
 
-
-# class FindTournamentView(LoginRequiredMixin, SuccessMessageMixin,TemplateView):
-# #     template_name = "tournament_find_by_date.html"
-# #
-# #     # model = TournamentFindForm
-# #     fields = ['start_date', 'end_date']
-# #     # success_message = "Entry was created successfully"
-# #     # success_url = reverse_lazy('all_tournament')
-# #     # login_url = reverse_lazy('index')
-
-
+# szukanie turnieju
 def find_tournament_view(request):
     start_date = models.DateField( )
     end_date = models.DateField( )
-
-    # return redirect('searching')
     return render(request, 'tournament_find_by_date.html')
 
 
-class FindTournamentResult(ListView):
-    # print("trololo reter")
-    # start_date = request.HttpRequest.POST.get("start_date")
-
-    model = Tournament
-    login_url = reverse_lazy('index')
-
-    # paginate_by = 10
-
-    def get_context_data(self, **kwargs):
-        logger.debug('AllTournamentView.get_context_data')
-
-        tournaments = Tournament.objects.all( )
-        for x in range(0, tournaments.count( )):
-            id_tournament = Tournament.objects.all( )[x].id
-            new_current_participiants = PlayerTournament.objects.filter(tournament=x).count( )
-            Tournament.objects.filter(id=id_tournament - 1).update(
-                current_number_participants=new_current_participiants)
-
-        context = super( ).get_context_data(**kwargs)
-
-        context['now'] = timezone.now( )
-        return context
-
-
+# Wynik szukania turnieju
 def find_tournament_result(request):
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')

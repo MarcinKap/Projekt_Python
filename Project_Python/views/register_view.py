@@ -17,23 +17,10 @@ class SignUpView(GuestOnlyView, FormView):
     def form_valid(self, form):
         request = self.request
         user = form.save(commit=False)
-
-        # if settings.DISABLE_USERNAME:
-        #     # Set a temporary username
-        #     user.username = get_random_string()
-        # else:
         user.username = form.cleaned_data['username']
-
-        # if settings.ENABLE_USER_ACTIVATION:
-        #     user.is_active = False
         user.is_active = True
-
-        # Create a user record
         user.save( )
-
-        # Change the username to the "user_ID" form
         raw_password = form.cleaned_data['password1']
-
         user = authenticate(username=user.username, password=raw_password)
         login(request, user)
 

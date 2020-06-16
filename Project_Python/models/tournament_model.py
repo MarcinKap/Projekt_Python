@@ -3,7 +3,7 @@ from django.db import models
 
 from Project_Python.models.player_model import Player
 
-
+# model turnieju
 class Tournament(models.Model):
     id = models.AutoField(db_index=True, primary_key=True)
     name = models.CharField(max_length=20)

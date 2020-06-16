@@ -5,7 +5,7 @@ from django.db import models
 from Project_Python.models import Tournament, Player
 from Project_Python.models.tournament_phase_model import TournamentPhase
 
-
+# relacja faza turnieju - gracz
 class TournamentPhasePlayer(models.Model):
     id = models.AutoField(db_index=True, primary_key=True)
     tournament_phase = models.ForeignKey(TournamentPhase, on_delete=models.CASCADE)

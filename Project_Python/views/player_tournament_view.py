@@ -7,21 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from Project_Python.models import Tournament, PlayerTournament, Player
 
 
-# class CreatePlayerTournamentView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-#     model = PlayerTournament
-#
-#     # ref = (self.request.GET).dict( )
-#     # data = ref['']
-#
-#     obj = Tournament.objects.get(pk=int(1))
-#     # print(obj.__module__)
-#
-#     fields = ['tournament', 'player']
-#     success_message = "Entry was created successfully"
-#     success_url = reverse_lazy('all_tournament')
-#     login_url = reverse_lazy('index')
-
-
+# Tworzenie relacji gracz - turniej
 class CreatePlayerTournamentView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = PlayerTournament
     fields = ['tournament', 'player']
@@ -30,6 +16,7 @@ class CreatePlayerTournamentView(LoginRequiredMixin, SuccessMessageMixin, Create
     login_url = reverse_lazy('index')
 
 
+# Zapisanie relacji
 def add_player(request):
     tournament_id = request.POST.get('tournament')
     player_id = request.POST.get('player')
@@ -49,12 +36,3 @@ def add_player(request):
         object = PlayerTournament.objects.create(tournament=tournament_object, player=player_object)
 
     return redirect('/')
-
-# def CreatePlayerTournamentView(request):
-#
-#
-#     context = {
-#         'tournament' : Tournament.objects.get(pk=int(1)),
-#         'players' : Player.objects.filter()
-#     }
-#     return render(request, 'playertournament_form.html', context)

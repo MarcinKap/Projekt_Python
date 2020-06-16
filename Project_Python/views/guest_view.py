@@ -3,7 +3,7 @@ from django.views import View
 
 from Projekt import settings
 
-
+# Klasa blokuje wchodzenie na strone rejestracji zarejestrowanym uzytkownikom
 class GuestOnlyView(View):
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the index page if the user already authenticated
